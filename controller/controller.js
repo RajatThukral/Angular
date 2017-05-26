@@ -79,6 +79,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
           .then(function(data){
             console.log(":)")
           });
+			alert("Successfully Added!!!");
         	$scope.newGenre={};
         };
 
@@ -94,7 +95,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
           .then(function(data){
             console.log(":)")
           });
-		   alert("Successfully Added!!!");
+		   
         };
 
         $scope.saveGenre=function(genre){

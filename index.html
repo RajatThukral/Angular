@@ -15,8 +15,8 @@
 	  <script src="scripts/ui-bootstrap-tpls-2.3.0.min.js"> </script>
 	  <link rel="stylesheet" type="text/css" href="styles/style.css"/>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
 </head>
 <body ng-app="myApp" ng-controller="trackController">
 	<h3><span> <img src="icons/music.png"></span>   Music Tracks</h3>
@@ -42,7 +42,7 @@
 				<div class="list-group">
 					<a href="#" title="left click to edit/remove this track" data-toggle="modal" data-target="#edit" ng-click="editTrack(track)" class="list-group-item" ng-repeat="track in titles">
 					{{track.title}} <div class="text-right">
-            <span uib-rating ng-model="track.rating" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
+            <span uib-rating ng-model="track.rating" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></span>
             </div>
 					</a>
 				</div>
