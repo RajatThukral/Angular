@@ -1,0 +1,42 @@
+#search{
+	width:100%;
+	-webkit-border-radius:10px;
+	border: 2px solid black;
+	color: black;
+	padding:6px 6px 6px 45px;
+	font-size: 25px;
+	background-image:url('../icons/search.png');
+	background-repeat: no-repeat;
+	background-position: left;
+	}
+h3{
+	font-size:40px;
+	font-weight:bold;
+	text-align:center;
+	font-family: 'Rubik', sans-serif;
+	}
+.custombtn{
+	text-align:center;
+	padding: 50px;
+	width: 100%;
+	}
+.btnsize{
+	font-size:20px;
+	}
+#li{
+	font-family: 'Play', sans-serif;
+	font-weight: 25px;
+	border: 2px solid black;
+    }
+#left{
+	text-align: left;
+	font-family:'Rubik', sans-serif;
+
+}
+#align{
+	text-align: center;
+	font-family:'Rubik', sans-serif;
+}
+.flex{
+		display: flex;
+}

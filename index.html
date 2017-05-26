@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MusicTrack AngularJS FrontEnd Assignment GreedyGame</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="controller/controller.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.js"> </script>
+	  <script src="scripts/ui-bootstrap-tpls-2.3.0.min.js"> </script>
+	  <link rel="stylesheet" type="text/css" href="styles/style.css"/>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+</head>
+<body ng-app="myApp" ng-controller="trackController">
+	<h3><span> <img src="icons/music.png"></span>   Music Tracks</h3>
+
+<!-- SEARCH BAR -->
+<div class="container">
+		<div class="row">
+			<div class="span12">
+				<form>
+          <div class="flex">
+          <input id="search" align="middle" type="text" name="search" placeholder="search title" ng-model="searchTitle"/>
+          <button type="submit" class="btn btn-primary btn-lg" ng-click="search()"> GO! <span> <img src="icons/goblue.png"></span></button>
+        </div>
+      </form>
+      </div>
+		</div>
+	</div>
+<br/>
+<!-- LIST CONTENT -->
+	<div class="container">
+		<div class="row">
+			<div=class="span12">
+				<div class="list-group">
+					<a href="#" title="left click to edit/remove this track" data-toggle="modal" data-target="#edit" ng-click="editTrack(track)" class="list-group-item" ng-repeat="track in titles">
+					{{track.title}} <div class="text-right">
+            <span uib-rating ng-model="track.rating" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
+            </div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- MODAL FOR EDIT TITLE -->
+	<div class="container">
+		<div class="row">
+			<div=class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+				<div class="custombtn">
+					<div class="modal" id="edit" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title" id="left"><span> <img src="icons/edit.png"></span> Edit this track: </h4>
+								</div>
+								<div class="modal-body">
+									<form role="form">
+										<div class="form-group">
+											<input type="text" class="form-control" value="{{current.title}}" ng-model="current.title"/>
+										</div>
+								    </form>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-primary" ng-click="removeTrack(current)" data-dismiss="modal"><span> <img src="icons/delete.png"></span> DELETE</button>
+									<button class="btn btn-primary" ng-click="saveTrack(current)" data-dismiss="modal"><span> <img src="icons/save.png"></span> UPDATE AND SAVE </button>
+									<button class="btn btn-primary" data-dismiss="modal"><span> <img src="icons/close.png"></span> CLOSE</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- ADD BUTTON -->
+	<div class="container" id="align">
+		<button class="btn btn-primary btn-lg" data-target="#addTrack" data-toggle="modal" ><span><img src="icons/musicadd.png"></span></br<div class="btnsize">Add New Track </div></br></button>
+	</div>
+<!-- MODAL FOR ADD TRACK -->
+	<div class="container">
+		<div class="row">
+			<div=class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+				<div class="custombtn">
+
+					<div class="modal" id="addTrack" tabindex="-1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title" id="left"><span> <img src="icons/musicadd.png"> Enter the track you want to add: </h4>
+								</div>
+								<div class="modal-body">
+									<form role="form">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Enter Title here" ng-model="newTrack.title"/>
+										</div>
+								    </form>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-primary" ng-click="addNewTrack()" data-dismiss="modal"><span> <img src="icons/create.png"> CREATE</button>
+                  <button class="btn btn-primary" data-dismiss="modal"><span> <img src="icons/close.png"> CLOSE</button>
+                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- PAGINATION FOR TRACKS -->
+	<div class="container">
+		<div class="row">
+			<div=class="span12">
+				<div class="text-center">
+			       <ul uib-pagination total-items="totalTracks" ng-model="currentPage" ng-change="pageChanged()" force-ellipses ="true" max-size="maxSize" direction-links ="false" items-per-page="itemsPerPage"></ul>
+              <pre>The selected page no: {{currentPage}}</pre>
+        </div>
+			</div>
+		</div>
+	</div>
+<hr/>
+<pre>
+
+<!-- BREAK SECTION IN B/W TRACKS AND GENRES-->
+
+</pre>
+<hr/>
+<!-- HEADING FOR GENRE -->
+  <h3>  Track's Genres <span> <img src="icons/genre.png"></span></h3>
+<div class="container">
+    <div class="row">
+      <div=class="span12">
+        <div class="list-group">
+          <a href="#" title="left click to edit/remove this genre" data-toggle="modal" data-target="#editg" ng-click="editGenre(genre)" class="list-group-item" ng-repeat="genre in genres">
+          {{genre.name}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- MODAL FOR EDIT GENRE -->
+  <div class="container">
+    <div class="row">
+      <div=class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="custombtn">
+          <div class="modal" id="editg" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" id="left"><span> <img src="icons/edit.png"></span> Edit this genre: </h4>
+                </div>
+                <div class="modal-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" value="{{currentGenre.name}}" ng-model="currentGenre.name"/>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="removeGenre(currentGenre)" data-dismiss="modal"><span> <img src="icons/delete.png"></span> DELETE</button>
+                  <button class="btn btn-primary" ng-click="saveGenre(currentGenre)" data-dismiss="modal"><span> <img src="icons/save.png"></span> UPDATE AND SAVE </button>
+                  <button class="btn btn-primary" data-dismiss="modal"><span> <img src="icons/close.png"> CLOSE</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ADD GENRE button -->
+  <div class="container" id="align">
+    <button class="btn btn-primary btn-lg" data-target="#addGenre" data-toggle="modal" ><span><img src="icons/musicadd.png"></span></br<div class="btnsize">Add New Genre </div></br></button>
+  </div>
+<!-- MODAL FOR ADD GENRE -->
+  <div class="container">
+    <div class="row">
+      <div=class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="custombtn">
+
+          <div class="modal" id="addGenre" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" id="left"><span> <img src="icons/musicadd.png"> Enter the genre you want to add: </h4>
+                </div>
+                <div class="modal-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Genre here" ng-model="newGenre.name"/>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="addNewGenre()" data-dismiss="modal"><span> <img src="icons/create.png"></span> CREATE</button>
+                  <button class="btn btn-primary" data-dismiss="modal"><span> <img src="icons/close.png"></span> CLOSE</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- PAGINATION FOR GENRES -->
+  <div class="container">
+    <div class="row">
+      <div=class="span12">
+        <div class="text-center">
+             <ul uib-pagination total-items="totalGenres" ng-model="currentPageGenre" ng-change="pageChangedGenre()" force-ellipses ="true" max-size="maxSize" direction-links ="false" items-per-page="itemsPerPage"></ul>
+             <pre>The selected page no: {{currentPageGenre}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
