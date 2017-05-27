@@ -9,7 +9,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
       $scope.totalTracks=930;
       $scope.totalGenres=1159;
 
-      $http.get('//104.197.128.152:8000/v1/tracks')
+      $http.get('http://104.197.128.152:8000/v1/tracks')
 			.then(function(response){
 					$scope.titles = response.data.results;
           console.log(response);
@@ -17,7 +17,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
 
       function getPageTitle() {
 
-      $http.get('//104.197.128.152:8000/v1/tracks?page='+ ($scope.currentPage))
+      $http.get('http://104.197.128.152:8000/v1/tracks?page='+ ($scope.currentPage))
 			.then(function(response){
 					$scope.titles = response.data.results;
           console.log(response);
@@ -27,12 +27,11 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
       $scope.addNewTrack=function() {
         $scope.titles.push($scope.newTrack);
         $scope.newTrack={};
-        $http.post('//104.197.128.152:8000/v1/tracks',$scope.titles.push($scope.newTrack))
+        $http.post('http://104.197.128.152:8000/v1/tracks',$scope.titles.push($scope.newTrack))
         .then(function(data){
           console.log(":)");
           });
-        alert("Successfully Added!!!");
-		$scope.newTrack={};
+
       };
 
       $scope.removeTrack=function(track){
@@ -43,7 +42,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
 
       $scope.editTrack=function(track){
         $scope.current= track;
-        $http.post('//104.197.128.152:8000/v1/tracks/1',$scope.current)
+        $http.post('http://104.197.128.152:8000/v1/tracks/1',$scope.current)
         .then(function(data){
           console.log(":)")
         });
@@ -57,7 +56,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
         getPageTitle();
         };
 
-        $http.get('//104.197.128.152:8000/v1/genres')
+        $http.get('http://104.197.128.152:8000/v1/genres')
   			.then(function(response){
   					$scope.genres = response.data.results;
 
@@ -65,7 +64,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
   				});
 
       function getPageGenre(){
-      $http.get('//104.197.128.152:8000/v1/genres?page='+ $scope.currentPageGenre)
+      $http.get('http://104.197.128.152:8000/v1/genres?page='+ $scope.currentPageGenre)
 			.then(function(response){
 					$scope.genres = response.data.results;
           console.log(response);
@@ -75,11 +74,10 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
   				$scope.genres.push($scope.newGenre);
   				$scope.newGenre={};
 
-          $http.post('//104.197.128.152:8000/v1/genres',$scope.genres.push($scope.newGenre))
+          $http.post('http://104.197.128.152:8000/v1/genres',$scope.genres.push($scope.newGenre))
           .then(function(data){
             console.log(":)")
           });
-			alert("Successfully Added!!!");
         	$scope.newGenre={};
         };
 
@@ -91,11 +89,10 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
 
         $scope.editGenre=function(genre){
           $scope.currentGenre= genre;
-          $http.post('//104.197.128.152:8000/v1/genres/11',$scope.currentGenre)
+          $http.post('http://104.197.128.152:8000/v1/genres/11',$scope.currentGenre)
           .then(function(data){
             console.log(":)")
           });
-		   
         };
 
         $scope.saveGenre=function(genre){
@@ -115,7 +112,7 @@ var myApp = angular.module('myApp', ['ui.bootstrap']);
         };
 
         $scope.search = function(){
-            $http.get('//104.197.128.152:8000/v1/tracks?title='+($scope.searchTitle))
+            $http.get('http://104.197.128.152:8000/v1/tracks?title='+($scope.searchTitle))
               .then(function(response){
                 $scope.titles=response.data.results;
                 console.log(response);
